@@ -2,13 +2,12 @@
 	<head>
 		<meta charset="utf-8">
 	</head>
-  <body style="background:#409;color:#FFF">
-		<style type="text/css"></style>
+  <body style="background:#FFF;color:#555;font-family:helvetica">
     <script type="text/javascript" id="data">
-data = {
-  "foo":"bar",
-  "a":12
-}
+      data = {
+        "title":"You can edit this title in the browser",
+        "content":"and this text too"
+      }
     </script>
 		<script type="text/javascript">
       let $ = (s) => document.querySelector(s)
@@ -27,14 +26,15 @@ data = {
         };
 
         window.type = () => {
-          app.foo  = prompt("enter string")
           app.save()
           setTimeout( () => app.download(),200 ) // update dom
         }
       })
 		</script>
-    <b x-data x-text="$store.app.foo"></b>
-    <button x-data @click="window.type()">download</button>
+    <h1 contenteditable="true" @input="$store.app.title = $el.textContent" x-data x-text="$store.app.title"></h1>
+    <textarea x-data x-model="$store.app.content"></textarea>
+    <br><br>
+    <button x-data @click="window.type()">save</button>
 
     <!-- alpinejs -->
     <script type="text/javascript">
